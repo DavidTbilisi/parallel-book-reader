@@ -1,36 +1,40 @@
 import React from 'react';  
-import BookViewer from './components/BookViewer';   
-import AppNav from './components/AppNav'; 
+import AppNav from './components/AppNav.js';
+import BookViewer from './components/BookViewer.js';
+import books from './dummyData.js';
+import './App.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+
 
 class App extends React.Component {  
 
 
   constructor(props) {
     super(props);
-    this.state = {color: "Red"}; 
-    this.books = [  
-        {id: 1, language: "English", book: "Book 1", content: "Lorem ipsum"},  
-        {id: 2, language: "Norwegian", book: "Book 1", content: "Lorem ipsum"},   
-        {id: 3, language: "Georgian", book: "Book 1", content: "Lorem ipsum"}    
-    ];    
+    this.books = books;
   }
 
   render() {
     return <>
-        <AppNav />  
-
-        <h1>Hi {this.state.color}, I am a React App!</h1>
+        <AppNav />
+        <Container className='mt-5'>
+        <Row>
         {
           this.books.map((item) => 
+            <Col>
             <BookViewer 
               key={item.id}
               language={item.language} 
               book={item.book} 
               content={item.content}
             />
+            </Col>
           )
         }
-    
+        </Row>
+      </Container>
     </>
   }
 }     
