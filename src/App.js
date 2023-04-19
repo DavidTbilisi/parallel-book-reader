@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
     this.books = books;
   }
-
+// TODO: add buttons to next and previews chapters
   render() {
     return <>
         <AppNav />
