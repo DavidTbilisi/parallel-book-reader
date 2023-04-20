@@ -25,9 +25,9 @@ function TestApp() {
                 <Col><input type='number' className='w-100' placeholder='Book id' onChange={changeBook}/> </Col>
                 <Col><input type='number' className='w-100' placeholder='Chapter' onChange={changeChapter}/> </Col>
             </Row>
-            <hr />
+        </Container>
 
-            <Row> Book: {book.book}, Chapter: {book.chapter}</Row>
+        <Container fluid className='mt-5'>
             <Row>
                 <Col><BookViewerApi lang="ka" bookId={book.book} chapter={book.chapter} version="geo" /></Col>
                 <Col><BookViewerApi lang="en" bookId={book.book} chapter={book.chapter} version="kjv" /></Col>

@@ -1,8 +1,12 @@
 import React, {useState, useEffect}  from 'react';
+import { Parser } from 'html-to-react'
 function BookViewer (props) {
   const [book, setBook] = useState([]);
 
-  useEffect(() => {getBook(props.bookId, props.chapter, props.lang, props.version)},[props]);
+  useEffect(() => {
+    console.log(props)
+    getBook(props.bookId, props.chapter, props.lang, props.version)
+  },[props]);
 
 
   function getBook(book_id=1, chapter=1, language="ka", version="geo") {
@@ -13,13 +17,17 @@ function BookViewer (props) {
 
       return <>
       <div className='book-reader'>
-        <div className='book'>  
-            <h2>{book.book}</h2>  
-            <p className='language'><small>{book.chapter}</small></p>
+        <div className='book'>
+
+           
+            <h2 className='mb-3'>{book.book} {book.chapter}</h2>  
             <div className='book-content shadow-lg p-3 mb-5 bg-white border border-secondary'>  
-                {
-                  Object.values(book.verses)
-                }
+            { book.verses !== undefined 
+              ? Object.values(book.verses).map((v,k) => {
+                  return <p key={k} style={{fontSize:27}}>{Parser().parse(v)}</p>
+                })
+              : "Nothing is in verses"
+            }
             </div>
         </div>
       </div>
