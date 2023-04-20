@@ -29,9 +29,9 @@ function TestApp() {
 
             <Row> Book: {book.book}, Chapter: {book.chapter}</Row>
             <Row>
-                <Col><BookViewerApi bookId={book.book} chapter="" /></Col>
-                <Col><BookViewerApi bookId={book.book+1} chapter="" /></Col>
-                <Col><BookViewerApi bookId={book.book+2} chapter="" /></Col>
+                <Col><BookViewerApi lang="ka" bookId={book.book} chapter={book.chapter} version="geo" /></Col>
+                <Col><BookViewerApi lang="en" bookId={book.book} chapter={book.chapter} version="kjv" /></Col>
+                <Col><BookViewerApi lang="ru" bookId={book.book} chapter={book.chapter} version="rusv" /></Col>
             </Row>
         </Container>
     </>
