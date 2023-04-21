@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import './App.css';
 import BookViewerApi from './components/BookViewerApi.js';
-
+import books from './Books.js';
 function TestApp() {
 
     const [book, setBook] = useState({
@@ -22,9 +22,15 @@ function TestApp() {
     return <>
         <Container className='mt-5'>
             <Row> 
-                <Col><input type='number' className='w-100' placeholder='Book id' onChange={changeBook}/> </Col>
-                <Col><input type='number' className='w-100' placeholder='Chapter' onChange={changeChapter}/> </Col>
+                <Col>
+                <select onChange={changeBook} className='form-control'>
+                    {books.map((book) => {return <option key={book.id} value={book.id}>{book.name}</option>})}
+                </select> 
+                </Col>
+                <Col><input type='number' className='w-100 form-control' placeholder='Chapter' onChange={changeChapter}/> </Col>
             </Row>
+
+            <Row> Book ID: {book.book}</Row>
         </Container>
 
         <Container fluid className='mt-5'>
