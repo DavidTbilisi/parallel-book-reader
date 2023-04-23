@@ -12,11 +12,20 @@ function TestApp() {
         chapter: 1,
     })
 
+    const [georgianBookId, setGeorgianBookId] = useState(1);
+
     function changeBook(event) {
         setBook(prev => { return {...prev, book: event.target.value}})
+        setGeorgianBookId(getGeoBookId(event.target.value))               
     }
     function changeChapter(event) {
         setBook(prev => { return {...prev, chapter: event.target.value}})
+    }
+
+    function getGeoBookId(book_id) {
+        if (book_id >= 59 && book_id <= 65) return book_id - 14;  
+        else if (book_id >= 45 && book_id <= 58) {return parseInt(book_id) + 7}    
+        else return book_id;                
     }
 
     return <>
@@ -35,7 +44,7 @@ function TestApp() {
 
         <Container fluid className='mt-5'>
             <Row>
-                <Col><BookViewerApi lang="ka" bookId={book.book} chapter={book.chapter} version="geo" /></Col>
+                <Col><BookViewerApi lang="ka" bookId={georgianBookId} chapter={book.chapter} version="geo" /></Col>
                 <Col><BookViewerApi lang="en" bookId={book.book} chapter={book.chapter} version="kjv" /></Col>
                 <Col><BookViewerApi lang="ru" bookId={book.book} chapter={book.chapter} version="rusv" /></Col>
             </Row>
