@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form';
 import './App.css';
 import BookViewerApi from './components/BookViewerApi.js';
 import books from './Books.js';
@@ -11,6 +12,18 @@ function TestApp() {
         book: 1,
         chapter: 1,
     })
+    const [isLang, setLang] = useState({
+        ka: true, 
+        en: true,
+        ru: true,
+    })
+
+    const langDefaults = {
+        ka: {version: "geo"},
+        en: {version: "kjv"},
+        ru: {version: "rusv"}
+    }
+ 
 
     const [georgianBookId, setGeorgianBookId] = useState(1);
 
@@ -28,25 +41,58 @@ function TestApp() {
         else return book_id;                
     }
 
+    function languageVisibility(event) {
+        setLang( prev => {
+            let lang = event.target.id;
+            return {...prev, [lang] : !isLang[lang]}
+        })
+    }
+
+
     return <>
         <Container className='mt-5'>
             <Row> 
                 <Col>
                 <select onChange={changeBook} className='form-control'>
-                    {books.map((book) => {return <option key={book.id} value={book.id}>{book.name}</option>})}
+                    {books.map((book) => {return <option key={`bookid_${book.id}`} value={book.id}>{book.name}</option>})}
                 </select> 
                 </Col>
                 <Col><input type='number' className='w-100 form-control' placeholder='Chapter' onChange={changeChapter}/> </Col>
             </Row>
 
-            <Row> Book ID: {book.book}</Row>
+            <Row> 
+                <Col> Book ID: {book.book} </Col> 
+                <Col>
+                    {Object.keys(isLang).map((lang, key) => 
+                        <Form.Check 
+                            key={`lang_${key}`} 
+                            inline 
+                            checked={isLang[lang]} 
+                            onChange={languageVisibility} 
+                            type="switch" 
+                            id={lang} 
+                            label={lang} 
+                        /> 
+                    )}
+                </Col>
+            </Row>
         </Container>
 
         <Container fluid className='mt-5'>
             <Row>
-                <Col><BookViewerApi lang="ka" bookId={georgianBookId} chapter={book.chapter} version="geo" /></Col>
-                <Col><BookViewerApi lang="en" bookId={book.book} chapter={book.chapter} version="kjv" /></Col>
-                <Col><BookViewerApi lang="ru" bookId={book.book} chapter={book.chapter} version="rusv" /></Col>
+                
+            {Object.keys(isLang).map((lang, key) => 
+                isLang[lang] &&
+                <Col>
+                    <BookViewerApi 
+                        key={`book_${key}`} 
+                        lang={lang} 
+                        bookId={lang==="ka"?georgianBookId:book.book} 
+                        chapter={book.chapter} 
+                        version={langDefaults[lang].version} 
+                    />
+                </Col>
+            )}
             </Row>
         </Container>
     </>
