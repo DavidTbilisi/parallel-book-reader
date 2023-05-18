@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/parallel-book-reader/static/css/main.e6c13ad2.css",
+    "main.js": "/parallel-book-reader/static/js/main.bed7e5ac.js",
+    "static/js/787.d9595ebe.chunk.js": "/parallel-book-reader/static/js/787.d9595ebe.chunk.js",
+    "index.html": "/parallel-book-reader/index.html",
+    "main.e6c13ad2.css.map": "/parallel-book-reader/static/css/main.e6c13ad2.css.map",
+    "main.bed7e5ac.js.map": "/parallel-book-reader/static/js/main.bed7e5ac.js.map",
+    "787.d9595ebe.chunk.js.map": "/parallel-book-reader/static/js/787.d9595ebe.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.bed7e5ac.js"
+  ]
+}
