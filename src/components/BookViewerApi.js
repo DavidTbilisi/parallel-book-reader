@@ -22,7 +22,7 @@ function BookViewer (props) {
             
             { book.verses !== undefined 
               ? Object.values(book.verses).map((v,k) => {
-                  return <p key={`verse_${k}`} style={{fontSize:27}}>{Parser().parse(v)}</p>
+                  return <p key={`verse_${k}`} style={{fontSize:"2.7rem"}}>{Parser().parse(v)}</p>
                 })
               : "Nothing is in verses"
             }
